@@ -1,4 +1,4 @@
-#DevOps Project 2
+<h1>DevOps Project 2</h1>
 
 <h2>Author:</h2>
 Jordan McCord
