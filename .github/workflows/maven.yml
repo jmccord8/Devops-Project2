@@ -30,7 +30,8 @@ jobs:
     - name: Verify with Maven
       run: |
         echo TESTING Project 2
-        cd 'code\Devops-Project2'
+        cd 'code/Devops-Project2'
+        pwd
         mvn --batch-mode --update-snapshots clean verify
         cd ../..
 
