@@ -1,3 +1,4 @@
 edu\westga\devops\project2\Main.class
 edu\westga\devops\project2\model\Item.class
-edu\westga\devops\project2\view\MainWindow.class
+edu\westga\devops\project2\model\ItemManager.class
+edu\westga\devops\project2\view\codebehind\MainWindow.class
