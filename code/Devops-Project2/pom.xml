@@ -92,8 +92,8 @@
 							<addClasspath>true</addClasspath>
 							<mainClass>
 								<!--  The main class for launching the app  -->
-edu.westga.devops.project2.Main
-</mainClass>
+								edu.westga.devops.project2.Main
+							</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
