@@ -49,4 +49,11 @@ public class Item {
 		this.quantity = quantity;
 	}
 
+	@Override
+	public String toString() {
+		if(this.quantity > 1) {
+			return this.name + " (" + this.quantity + ")";
+		}
+		return this.name ;
+	}
 }
