@@ -8,6 +8,7 @@ import edu.westga.devops.project2.model.ItemManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
 
@@ -24,6 +25,9 @@ public class MainWindow {
 
 	@FXML
 	private Button removeItemButton;
+
+	@FXML
+	private Label resultLabel;
 
 	private static ItemManager itemManager;
 
@@ -61,7 +65,10 @@ public class MainWindow {
 			if (result.isPresent()) {
 				Item item = new Item(result.get());
 				itemManager.addItem(item);
+				this.resultLabel.setText("Item was successfully added");
 				this.refreshItemListView();
+			} else {
+				this.resultLabel.setText("");
 			}
 		} catch (IllegalArgumentException ex) {
 			this.displayError(ex.getMessage());
@@ -80,7 +87,10 @@ public class MainWindow {
 				Optional<String> result = itemDialog.showAndWait();
 				if (result.isPresent()) {
 					selectedItem.setQuantity(Integer.valueOf(result.get()));
+					this.resultLabel.setText(selectedItem.getName() + " quantity was updated to " + result.get());
 					this.refreshItemListView();
+				} else {
+					this.resultLabel.setText("");
 				}
 			} else {
 				throw new Exception();
@@ -100,6 +110,7 @@ public class MainWindow {
 			Item selectedItem = this.itemListView.getSelectionModel().getSelectedItem();
 			if (selectedItem != null) {
 				itemManager.removeItem(selectedItem);
+				this.resultLabel.setText(selectedItem.getName() + " was removed");
 			} else {
 				throw new Exception();
 			}
