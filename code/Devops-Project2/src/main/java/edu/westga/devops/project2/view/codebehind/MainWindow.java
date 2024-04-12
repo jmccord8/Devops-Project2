@@ -1,5 +1,6 @@
 package edu.westga.devops.project2.view.codebehind;
 
+import java.util.InputMismatchException;
 import java.util.Optional;
 
 import edu.westga.devops.project2.model.Item;
@@ -46,6 +47,7 @@ public class MainWindow {
 
 	private void refreshItemListView() {
 		this.itemListView.setItems(itemManager.getItems());
+		this.itemListView.refresh();
 	}
 
 	@FXML
@@ -81,13 +83,12 @@ public class MainWindow {
 				if (result.isPresent()) {
 					selectedItem.setQuantity(Integer.valueOf(result.get()));
 					this.refreshItemListView();
-				} else {
-					
 				}
-
 			} else {
 				throw new Exception();
 			}
+		} catch (InputMismatchException ex) {
+			this.displayError("Quantity must be an integer value greater than 0.");
 		} catch (IllegalArgumentException ex) {
 			this.displayError(ex.getMessage());
 		} catch (Exception ex) {
