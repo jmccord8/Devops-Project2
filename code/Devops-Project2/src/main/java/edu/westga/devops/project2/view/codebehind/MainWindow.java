@@ -69,6 +69,33 @@ public class MainWindow {
 	}
 
 	@FXML
+	void editItem() {
+		try {
+			Item selectedItem = this.itemListView.getSelectionModel().getSelectedItem();
+			if (selectedItem != null) {
+				TextInputDialog itemDialog = new TextInputDialog();
+				itemDialog.setTitle("Edit Quantity");
+				itemDialog.setHeaderText("Enter the item quantity");
+				itemDialog.setContentText("Quantity:");
+				Optional<String> result = itemDialog.showAndWait();
+				if (result.isPresent()) {
+					selectedItem.setQuantity(Integer.valueOf(result.get()));
+					this.refreshItemListView();
+				} else {
+					
+				}
+
+			} else {
+				throw new Exception();
+			}
+		} catch (IllegalArgumentException ex) {
+			this.displayError(ex.getMessage());
+		} catch (Exception ex) {
+			this.displayError("No item was selected. Please select a item before clicking the edit button.");
+		}
+	}
+
+	@FXML
 	void removeItem() {
 		try {
 			Item selectedItem = this.itemListView.getSelectionModel().getSelectedItem();
