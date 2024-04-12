@@ -1,5 +1,6 @@
 package edu.westga.devops.project2.view.codebehind;
 
+import java.util.InputMismatchException;
 import java.util.Optional;
 
 import edu.westga.devops.project2.model.Item;
@@ -46,6 +47,7 @@ public class MainWindow {
 
 	private void refreshItemListView() {
 		this.itemListView.setItems(itemManager.getItems());
+		this.itemListView.refresh();
 	}
 
 	@FXML
@@ -65,6 +67,32 @@ public class MainWindow {
 			}
 		} catch (IllegalArgumentException ex) {
 			this.displayError(ex.getMessage());
+		}
+	}
+
+	@FXML
+	void editItem() {
+		try {
+			Item selectedItem = this.itemListView.getSelectionModel().getSelectedItem();
+			if (selectedItem != null) {
+				TextInputDialog itemDialog = new TextInputDialog();
+				itemDialog.setTitle("Edit Quantity");
+				itemDialog.setHeaderText("Enter the item quantity");
+				itemDialog.setContentText("Quantity:");
+				Optional<String> result = itemDialog.showAndWait();
+				if (result.isPresent()) {
+					selectedItem.setQuantity(Integer.valueOf(result.get()));
+					this.refreshItemListView();
+				}
+			} else {
+				throw new Exception();
+			}
+		} catch (InputMismatchException ex) {
+			this.displayError("Quantity must be an integer value greater than 0.");
+		} catch (IllegalArgumentException ex) {
+			this.displayError(ex.getMessage());
+		} catch (Exception ex) {
+			this.displayError("No item was selected. Please select a item before clicking the edit button.");
 		}
 	}
 
