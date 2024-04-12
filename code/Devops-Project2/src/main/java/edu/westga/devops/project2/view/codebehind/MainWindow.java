@@ -68,6 +68,23 @@ public class MainWindow {
 		}
 	}
 
+	@FXML
+	void removeItem() {
+		try {
+			Item selectedItem = this.itemListView.getSelectionModel().getSelectedItem();
+			if (selectedItem != null) {
+				itemManager.removeItem(selectedItem);
+			} else {
+				throw new Exception();
+			}
+			this.refreshItemListView();
+		} catch (IllegalArgumentException ex) {
+			this.displayError(ex.getMessage());
+		} catch (Exception ex) {
+			this.displayError("No item was selected. Please select a item before clicking the remove button.");
+		}
+	}
+
 	private void displayError(String text) {
 		Alert alert = new Alert(Alert.AlertType.ERROR);
 		alert.setTitle("Error");
