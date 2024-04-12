@@ -45,13 +45,13 @@ public class TestRemoveItem extends ApplicationTest {
 		ListView<Item> itemListView = lookup("#itemListView").query();
 
 		Object firstItem = itemListView.getItems().get(0);
-		Assertions.assertEquals("apple", firstItem.toString());
+		Assertions.assertEquals("apple (5)", firstItem.toString());
 
 		this.clickOn(firstItem.toString());
 		this.clickOn("#removeItemButton");
 
 		firstItem = itemListView.getItems().get(0);
-		Assertions.assertEquals("grape", firstItem.toString());
+		Assertions.assertEquals("apple", firstItem.toString());
 		FxAssert.verifyThat("#resultLabel", LabeledMatchers.hasText("apple was removed"));
 	}
 
