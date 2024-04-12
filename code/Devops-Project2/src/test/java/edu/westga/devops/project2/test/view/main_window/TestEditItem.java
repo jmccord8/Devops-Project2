@@ -5,7 +5,6 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.MouseButton;
 import javafx.scene.text.Text;
 
 import org.junit.jupiter.api.Assertions;
