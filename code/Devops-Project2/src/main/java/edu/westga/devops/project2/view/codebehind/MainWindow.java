@@ -62,8 +62,6 @@ public class MainWindow {
 				Item item = new Item(result.get());
 				itemManager.addItem(item);
 				this.refreshItemListView();
-			} else {
-				this.displayError("Cannot add an item with an empty name.");
 			}
 		} catch (IllegalArgumentException ex) {
 			this.displayError(ex.getMessage());
