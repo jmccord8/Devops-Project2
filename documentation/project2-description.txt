@@ -1,0 +1,74 @@
+In this project, you will be designing and implementing a basic Shopping List system utilizing a continuous integration pipeline. You are free to design the UI in any way you like as long as the system meets requirements established by the user stories and acceptance tests. As you work through the project, you will need to implement automated unit tests and automated UI tests as well as ensure code style meets expectations established by the standard Checkstyle configuration for the course. You will be required to build your project as a Maven project and host your Git repository on Github. 
+ 
+GETTING HELP
+I strongly recommend sharing your repository with me to better enable me to review your project if you have any questions. When you send me a question, ensure there is a specific point of concern (do not request a general review of your project). Additionally, please have a branch available with the current state of the system which I can review to explore the issue, and provide a complete description of the problem. If providing an error message, please copy and paste the entire error message into the email. Partial error messages often lack critical details to understand the problem.
+ 
+PROCESS
+While implementing this project, you must follow a feature branching process (as introduced in Lecture 7) utilizing Github Actions to establish a continuous integration pipeline (as introduced in Activity 6). You will setup your project to verify code style using Checkstyle, unit test coverage using JUnit and JaCoCo (as introduced in Activity 3), and system test coverage using TestFX and JaCoCo (as introduced in  Activity 7). You must provide appropriate unit tests to cover at least 90% of non-view code, and automated UI tests to cover all acceptance tests provided for the system.
+ 
+TASKS
+NOTE: You must have a feature branch (with associated pull request into your dev branch) for tasks 3, 4, and 5. 
+1 - Setup your project with the following plugins/dependencies.
+a) Checkstyle to support verifying code style
+b) JUnit to support automated unit testing
+c) TestFX to support automated UI tests
+d) JaCoCo to support verifying code coverage (you may exclude the root of the project with the Main class)
+3) JavaFX to support developing a GUI for the system
+ 
+2 - Setup your repository with the following.
+a) a development branch to serve as the primary integration point for all completed changes
+b) an appropriate Github action to trigger on any push or pull to any branch that verifies the project compiles, meets code style expectation, passes all developed tests, and meets code coverage expectations.
+c) branch restriction to require a pull request and all checks to pass (see 2.b) to merge changes into the development branch
+NOTE: You must submit a screenshot of this branch restriction in Github within your repository (recommend adding a screenshot directory to store the screenshots).
+ 
+3 - Implement user story 1: As a Shopper, I want to be able to add items to a shopping list, So that I can track what items I need to buy
+NOTE: You must implement an automated UI test for each acceptance test described for this user story.
+NOTE: You must submit a screenshot of the pull request for this feature with all checks passing within your repository.
+ 
+4 - Implement user story 2: As a Shopper, I want to be able to remove items from a shopping list, So that I can track what items I need to buy
+NOTE: You must implement an automated UI test for each acceptance test described for this user story.
+NOTE: You must submit a screenshot of the pull request for this feature with all checks passing within your repository.
+ 
+5 - Implement user story 3: As a Shopper, I want to be able to change the quantity for items on a shopping list, So that I can track how much of each item to buy
+NOTE: You must implement an automated UI test for each acceptance test described for this user story.
+NOTE: You must submit a screenshot of the pull request for this feature with all checks passing within your repository.
+ 
+ 
+USER STORIES
+1) As a Shopper, I want to be able to add items to a shopping list, So that I can track what items I need to buy
+add valid item
+Given the shopper provides a valid item name, 
+When the shopper selects to add the item, 
+Then the system will add the item to the shopping list displayed with an initial quantity of zero
+ 
+add invalid item
+Given the shopper provides an invalid item name (e.g., an empty name), 
+When the shopper selects to add the item, 
+Then the system will display an error message indicating a valid name must be provided
+ 
+2) As a Shopper, I want to be able to remove items from a shopping list, So that I can track what items I need to buy
+remove with item selected
+Given the shopper has an item selected,
+When the shopper selects to remove the item,
+Then the item will be removed from the shopping list
+ 
+remove without item selected
+Given the shopper does not have an item selected,
+When the shopper selects to remove an item,
+Then the system will display an error message indicating an item must be selected
+ 
+3) As a Shopper, I want to be able to change the quantity for items on a shopping list, So that I can track how much of each item to buy
+change quantity with item selected and positive quantity provided
+Given the shopper has entered a positive quantity (i.e., quantity > 0) and the shopper has selected an item,
+When the shopper selects to update the quantity for the item,
+Then the system will update the quantity for the item in the shopping list
+ 
+change quantity without item selected
+Given the shopper has not selected an item,
+When the shopper selects to update the quantity for the item,
+Then the system will display an error message indicating an item must be selected
+ 
+change quantity with item selected and nonpositive quantity provided
+Given the shopper has entered a non-positive quantity and the shopper has selected an item,
+When the shopper selects to update the quantity for the item,
+Then the system will display an error message indicating a positive quantity must be provided
