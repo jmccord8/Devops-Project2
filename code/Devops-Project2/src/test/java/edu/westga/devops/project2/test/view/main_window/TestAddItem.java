@@ -1,25 +1,19 @@
 package edu.westga.devops.project2.test.view.main_window;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.IOException;
-
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
+import javafx.scene.text.Text;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.api.FxAssert;
-import org.testfx.matcher.control.TextInputControlMatchers;
+import org.testfx.matcher.control.LabeledMatchers;
 
 import edu.westga.devops.project2.Main;
-import edu.westga.devops.project2.view.codebehind.MainWindow;
 
 public class TestAddItem extends ApplicationTest {
 
@@ -37,7 +31,21 @@ public class TestAddItem extends ApplicationTest {
 		this.type(KeyCode.L);
 		this.type(KeyCode.E);
 		this.type(KeyCode.ENTER);
+
+		FxAssert.verifyThat("#resultLabel", LabeledMatchers.hasText("Item was successfully added"));
+	}
+	
+	@Test
+	void addItemEmptyName() {
+		this.clickOn("#addItemButton");
+		this.type(KeyCode.ENTER);
 		
-		FxAssert.verifyThat("#itemListView", TextInputControlMatchers.hasText("Apple"));
+	    Node dialogPane = lookup(".dialog-pane").query();
+
+	    Text emptyName = from(dialogPane).lookup((Text t) -> t.getText().startsWith("Name cannot")).query();
+
+	    Assertions.assertNotNull(emptyName, "Dialog with text 'Name cannot' not found");
+	    
+	    Assertions.assertEquals("Name cannot be empty", emptyName.getText());
 	}
 }
